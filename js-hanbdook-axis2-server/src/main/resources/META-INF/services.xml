@@ -1,0 +1,15 @@
+<serviceGroup>
+    <service name="JsHandbookService" scope="application" targetNamespace="https://js-handbook.by//">
+        <description>
+            Service for method entities
+        </description>
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only"
+                             class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out"
+                             class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+        </messageReceivers>
+        <schema schemaNamespace="https://js-handbook.by/xsd"/>
+        <parameter name="ServiceClass">by.bsuir.talakh.service.JsHandbookService</parameter>
+    </service>
+</serviceGroup>
