@@ -1,46 +1,47 @@
 package by.bsuir.talakh.controller;
 
-import by.bsuir.talakh.jsobject.JsObject;
-import by.bsuir.talakh.method.Method;
-import by.bsuir.talakh.operator.Operator;
+import by.bsuir.talakh.domain.JsObjectAdapter;
+import by.bsuir.talakh.domain.MethodAdapter;
+import by.bsuir.talakh.domain.OperatorAdapter;
 import org.apache.thrift.TException;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 public interface Protocol {
-    void addMethod(Method method) throws TException;
+    void addMethod(MethodAdapter methodAdapter) throws TException;
 
-    List<Method> takeMethodList(JsObject jsObject) throws TException;
+    List<MethodAdapter> takeMethodList(JsObjectAdapter jsObjectAdapter) throws TException;
 
-    void updateMethod(Method method) throws TException;
+    void updateMethod(MethodAdapter methodAdapter) throws TException;
 
-    void deleteMethod(Method method) throws TException;
+    void deleteMethod(MethodAdapter methodAdapter) throws TException;
 
-    Method findMethodById(int id) throws TException;
+    MethodAdapter findMethodById(int id) throws TException;
 
-    Method findMethodByName(String name) throws TException;
+    MethodAdapter findMethodByName(String name) throws TException;
 
-    void addJsObject(JsObject jsObject) throws TException;
+    void addJsObject(JsObjectAdapter jsObjectAdapter) throws TException;
 
-    List<JsObject> takeJsObjectList() throws TException;
+    List<JsObjectAdapter> takeJsObjectList() throws TException;
 
-    void updateJsObject(JsObject jsObject) throws TException;
+    void updateJsObject(JsObjectAdapter jsObjectAdapter) throws TException;
 
-    void deleteJsObject(JsObject jsObject) throws TException;
+    void deleteJsObject(JsObjectAdapter jsObjectAdapter) throws TException;
 
-    JsObject findJsObjectById(int id) throws TException;
+    JsObjectAdapter findJsObjectById(int id) throws TException;
 
-    JsObject findJsObjectByName(String name) throws TException;
+    JsObjectAdapter findJsObjectByName(String name) throws TException;
 
-    void addOperator(Operator operator) throws TException;
+    void addOperator(OperatorAdapter operatorAdapter) throws TException;
 
-    List<Operator> takeOperatorList() throws TException;
+    List<OperatorAdapter> takeOperatorList() throws TException;
 
-    void updateOperator(Operator operator) throws TException;
+    void updateOperator(OperatorAdapter operatorAdapter) throws TException;
 
-    void deleteOperator(Operator operator) throws TException;
+    void deleteOperator(OperatorAdapter operatorAdapter) throws TException;
 
-    Operator findOperatorById(int id) throws TException;
+    OperatorAdapter findOperatorById(int id) throws TException;
 
-    Operator findOperatorByName(String name) throws TException;
+    OperatorAdapter findOperatorByName(String name) throws TException;
 }

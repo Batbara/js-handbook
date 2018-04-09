@@ -3,9 +3,9 @@ package by.bsuir.talakh.controller.command;
 import by.bsuir.talakh.controller.ApplicationController;
 import by.bsuir.talakh.controller.Protocol;
 import by.bsuir.talakh.controller.ProtocolException;
+import by.bsuir.talakh.domain.OperatorAdapter;
 import by.bsuir.talakh.gui.MainShell;
 import by.bsuir.talakh.gui.TextConstant;
-import by.bsuir.talakh.operator.Operator;
 import org.apache.thrift.TException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
@@ -13,9 +13,9 @@ import org.eclipse.swt.widgets.MessageBox;
 public class AddOperatorCommand implements ICommand {
     private MainShell mainShell;
     private ApplicationController controller;
-    private Operator operator;
+    private OperatorAdapter operator;
 
-    public AddOperatorCommand(MainShell mainShell, ApplicationController controller, Operator operator) {
+    public AddOperatorCommand(MainShell mainShell, ApplicationController controller, OperatorAdapter operator) {
         this.mainShell = mainShell;
         this.controller = controller;
         this.operator = operator;

@@ -2,6 +2,7 @@ package by.bsuir.talakh.gui;
 
 public final class TextConstant {
 
+    public static final String APP_TITLE = "JS Handbook";
     public static final String TYPE = "Type";
     public static final String ADD_BUTTON = "Add";
     public static final String DELETE_BUTTON = "Delete";
@@ -13,6 +14,7 @@ public final class TextConstant {
     public static final String RPC = "RPC";
 
     public static final String JS_OBJECT = "JS object";
+    public static final String PROTOCOL_SWITCHED = "Protocol switched!";
     public static final String OBJECT_METHOD = "Method";
     public static final String OPERATOR = "Operator";
 

@@ -40,10 +40,7 @@ public class ApplicationController implements Observer {
                     System.exit(-1);
             }
         }
-
-
     }
-
 
     public void startApplication() {
         mainShell.start();

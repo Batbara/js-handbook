@@ -3,13 +3,13 @@ package by.bsuir.talakh.controller.command;
 import by.bsuir.talakh.controller.ApplicationController;
 import by.bsuir.talakh.controller.Protocol;
 import by.bsuir.talakh.controller.ProtocolException;
+import by.bsuir.talakh.domain.JsObjectAdapter;
+import by.bsuir.talakh.domain.MethodAdapter;
+import by.bsuir.talakh.domain.OperatorAdapter;
 import by.bsuir.talakh.gui.ArticleView;
 import by.bsuir.talakh.gui.MainShell;
 import by.bsuir.talakh.gui.TextConstant;
 import by.bsuir.talakh.gui.TreeComponent;
-import by.bsuir.talakh.jsobject.JsObject;
-import by.bsuir.talakh.method.Method;
-import by.bsuir.talakh.operator.Operator;
 import org.apache.log4j.Logger;
 import org.apache.thrift.TException;
 import org.eclipse.swt.widgets.TreeItem;
@@ -38,20 +38,25 @@ public class ShowArticleCommand implements ICommand {
             switch (methodToInvoke) {
                 case TextConstant.OPERATOR_FIND_BY_NAME:
 
-                    Operator operator = currentProtocol.findOperatorByName(itemName);
+                    OperatorAdapter operator = currentProtocol.findOperatorByName(itemName);
                     String operatorSymbol = "Symbol: " + operator.getOperatorSymbol() + "\n\n";
-                    String operatorDescription = operatorSymbol + operator.getDescription();
+                    String operatorDescription;
+                    if (operator.getDescription().contains(operatorSymbol)) {
+                        operatorDescription = operator.getDescription();
+                    } else {
+                        operatorDescription = operatorSymbol + operator.getDescription();
+                    }
                     articleView.setArticle(operator);
                     articleView.setArticleText(operatorDescription);
                     break;
                 case TextConstant.JSOBJECT_FIND_BY_NAME:
-                    JsObject jsObject = currentProtocol.findJsObjectByName(itemName);
+                    JsObjectAdapter jsObject = currentProtocol.findJsObjectByName(itemName);
                     String jsObjectDescription = jsObject.getDescription();
                     articleView.setArticle(jsObject);
                     articleView.setArticleText(jsObjectDescription);
                     break;
                 case TextConstant.METHOD_FIND_BY_NAME:
-                    Method method = currentProtocol.findMethodByName(itemName);
+                    MethodAdapter method = currentProtocol.findMethodByName(itemName);
                     String methodDescription = method.getDescription();
                     articleView.setArticle(method);
                     articleView.setArticleText(methodDescription);

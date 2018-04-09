@@ -4,6 +4,7 @@ import by.bsuir.talakh.gui.TextConstant;
 import by.bsuir.talakh.jsobject.JsObjectService;
 import by.bsuir.talakh.method.MethodService;
 import by.bsuir.talakh.operator.OperatorService;
+import org.apache.axis2.AxisFault;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TMultiplexedProtocol;
 import org.apache.thrift.transport.TSocket;
@@ -17,36 +18,33 @@ public class ProtocolHandler {
     private Protocol currentProtocol;
 
     public ProtocolHandler() {
-        protocolMap = new HashMap<String, Protocol>();
-        protocolMap.put(TextConstant.RPC, new RpcProtocol());
-        initHandler();
+        protocolMap = new HashMap<>();
+        try {
+            protocolMap.put(TextConstant.RPC, createRpcProtocol());
+            protocolMap.put(TextConstant.SOAP, createSoapProtocol());
+        } catch (TTransportException e) {
+            throw new ProtocolException("Error with RPC", e);
+        } catch (AxisFault axisFault) {
+            throw new ProtocolException("Axis fault occurred", axisFault);
+        }
+        switchTo(TextConstant.SOAP);
 
     }
-
-    public void initHandler() throws ProtocolException {
-
-        switchTo(TextConstant.RPC);
-
-    }
-
 
     public void switchTo(String protocolName) throws ProtocolException {
-        if (protocolName.equals(TextConstant.RPC)) {
-            try {
-                switchToRpc();
-            } catch (TTransportException e) {
-                throw new ProtocolException("Error with RPC", e);
-            }
-        } else {
-            throw new ProtocolException(protocolName + " unknown protocol name");
-        }
+        currentProtocol = protocolMap.get(protocolName);
     }
 
     public Protocol getCurrentProtocol() {
         return currentProtocol;
     }
 
-    private void switchToRpc() throws TTransportException {
+    private Protocol createSoapProtocol() throws AxisFault {
+        return new SoapProtocol();
+
+    }
+
+    private Protocol createRpcProtocol() throws TTransportException {
         TSocket transport = new TSocket("localhost", 9090);
         transport.open();
 
@@ -59,7 +57,7 @@ public class ProtocolHandler {
         OperatorService.Client operatorService = new OperatorService.Client(
                 new TMultiplexedProtocol(thriftProtocol, "Operator"));
 
-        this.currentProtocol = new RpcProtocol(methodService, jsObjectService, operatorService);
+        return new RpcProtocol(methodService, jsObjectService, operatorService);
     }
 
 

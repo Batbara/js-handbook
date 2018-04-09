@@ -1,5 +1,9 @@
 package by.bsuir.talakh.controller;
 
+import by.bsuir.talakh.domain.DomainAdapter;
+import by.bsuir.talakh.domain.JsObjectAdapter;
+import by.bsuir.talakh.domain.MethodAdapter;
+import by.bsuir.talakh.domain.OperatorAdapter;
 import by.bsuir.talakh.jsobject.JsObject;
 import by.bsuir.talakh.jsobject.JsObjectService;
 import by.bsuir.talakh.method.Method;
@@ -9,6 +13,7 @@ import by.bsuir.talakh.operator.OperatorService;
 import org.apache.thrift.TException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RpcProtocol implements Protocol {
     private MethodService.Client methodService;
@@ -26,75 +31,115 @@ public class RpcProtocol implements Protocol {
         this.operatorService = operatorService;
     }
 
-    public void addMethod(Method method) throws TException {
+
+    @Override
+    public void addMethod(MethodAdapter methodAdapter) throws TException {
+        Method method = DomainAdapter.getThriftMethod(methodAdapter);
         methodService.addMethod(method);
     }
 
-    public List<Method> takeMethodList(JsObject jsObject) throws TException {
-        return methodService.takeAll(jsObject.getId());
+    @Override
+    public List<MethodAdapter> takeMethodList(JsObjectAdapter jsObject) throws TException {
+        List<Method> methods = methodService.takeAll(jsObject.getId());
+        return methods.stream()
+                .map(DomainAdapter::getMethodAdapterFromThrift)
+                .collect(Collectors.toList());
     }
 
-    public void updateMethod(Method method) throws TException {
+    @Override
+    public void updateMethod(MethodAdapter methodAdapter) throws TException {
+        Method method = DomainAdapter.getThriftMethod(methodAdapter);
         methodService.updateMethod(method);
     }
 
-    public void deleteMethod(Method method) throws TException {
+    @Override
+    public void deleteMethod(MethodAdapter methodAdapter) throws TException {
+        Method method = DomainAdapter.getThriftMethod(methodAdapter);
         methodService.deleteMethod(method);
     }
 
-    public Method findMethodById(int id) throws TException {
-        return methodService.findById(id);
+    @Override
+    public MethodAdapter findMethodById(int id) throws TException {
+        Method method = methodService.findById(id);
+        return DomainAdapter.getMethodAdapterFromThrift(method);
     }
 
-    public Method findMethodByName(String name) throws TException {
-        return methodService.findByName(name);
+    @Override
+    public MethodAdapter findMethodByName(String name) throws TException {
+        Method method = methodService.findByName(name);
+        return DomainAdapter.getMethodAdapterFromThrift(method);
     }
 
-    public void addJsObject(JsObject jsObject) throws TException {
+
+    @Override
+    public void addJsObject(JsObjectAdapter jsObjectAdapter) throws TException {
+        JsObject jsObject = DomainAdapter.getThriftJsObject(jsObjectAdapter);
         jsObjectService.addObject(jsObject);
     }
 
-    public List<JsObject> takeJsObjectList() throws TException {
-        return jsObjectService.takeAll();
+
+    public List<JsObjectAdapter> takeJsObjectList() throws TException {
+        List<JsObject> jsObjects = jsObjectService.takeAll();
+        return jsObjects.stream()
+                .map(DomainAdapter::getJsObjectAdapterFromThrift)
+                .collect(Collectors.toList());
     }
 
-    public void updateJsObject(JsObject jsObject) throws TException {
+    @Override
+    public void updateJsObject(JsObjectAdapter jsObjectAdapter) throws TException {
+        JsObject jsObject = DomainAdapter.getThriftJsObject(jsObjectAdapter);
         jsObjectService.updateObject(jsObject);
     }
 
-    public void deleteJsObject(JsObject jsObject) throws TException {
+    @Override
+    public void deleteJsObject(JsObjectAdapter jsObjectAdapter) throws TException {
+        JsObject jsObject = DomainAdapter.getThriftJsObject(jsObjectAdapter);
         jsObjectService.deleteObject(jsObject);
     }
 
-    public JsObject findJsObjectById(int id) throws TException {
-        return jsObjectService.findById(id);
+    public JsObjectAdapter findJsObjectById(int id) throws TException {
+        JsObject jsObject = jsObjectService.findById(id);
+        return DomainAdapter.getJsObjectAdapterFromThrift(jsObject);
     }
 
-    public JsObject findJsObjectByName(String name) throws TException {
-        return jsObjectService.findByName(name);
+    public JsObjectAdapter findJsObjectByName(String name) throws TException {
+        JsObject jsObject = jsObjectService.findByName(name);
+        return DomainAdapter.getJsObjectAdapterFromThrift(jsObject);
     }
 
-    public void addOperator(Operator operator) throws TException {
+    @Override
+    public void addOperator(OperatorAdapter operatorAdapter) throws TException {
+        Operator operator = DomainAdapter.getThriftOperator(operatorAdapter);
         operatorService.addOperator(operator);
     }
 
-    public List<Operator> takeOperatorList() throws TException {
-        return operatorService.takeAll();
+
+    public List<OperatorAdapter> takeOperatorList() throws TException {
+        List<Operator> operators = operatorService.takeAll();
+        return operators.stream()
+                .map(DomainAdapter::getOperatorAdapterFromThrift)
+                .collect(Collectors.toList());
     }
 
-    public void updateOperator(Operator operator) throws TException {
+    @Override
+    public void updateOperator(OperatorAdapter operatorAdapter) throws TException {
+        Operator operator = DomainAdapter.getThriftOperator(operatorAdapter);
         operatorService.updateOperator(operator);
     }
 
-    public void deleteOperator(Operator operator) throws TException {
+    @Override
+    public void deleteOperator(OperatorAdapter operatorAdapter) throws TException {
+        Operator operator = DomainAdapter.getThriftOperator(operatorAdapter);
         operatorService.deleteOperator(operator);
     }
 
-    public Operator findOperatorById(int id) throws TException {
-        return operatorService.findById(id);
+    public OperatorAdapter findOperatorById(int id) throws TException {
+        Operator operator = operatorService.findById(id);
+        return DomainAdapter.getOperatorAdapterFromThrift(operator);
     }
 
-    public Operator findOperatorByName(String name) throws TException {
-        return operatorService.findByName(name);
+    public OperatorAdapter findOperatorByName(String name) throws TException {
+        Operator operator = operatorService.findByName(name);
+        return DomainAdapter.getOperatorAdapterFromThrift(operator);
     }
 }

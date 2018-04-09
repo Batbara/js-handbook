@@ -3,9 +3,9 @@ package by.bsuir.talakh.controller.command;
 import by.bsuir.talakh.controller.ApplicationController;
 import by.bsuir.talakh.controller.Protocol;
 import by.bsuir.talakh.controller.ProtocolException;
+import by.bsuir.talakh.domain.MethodAdapter;
 import by.bsuir.talakh.gui.MainShell;
 import by.bsuir.talakh.gui.TextConstant;
-import by.bsuir.talakh.method.Method;
 import org.apache.thrift.TException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
@@ -13,9 +13,9 @@ import org.eclipse.swt.widgets.MessageBox;
 public class AddMethodCommand implements ICommand {
     private MainShell mainShell;
     private ApplicationController controller;
-    private Method method;
+    private MethodAdapter method;
 
-    public AddMethodCommand(MainShell mainShell, ApplicationController controller, Method method) {
+    public AddMethodCommand(MainShell mainShell, ApplicationController controller, MethodAdapter method) {
         this.mainShell = mainShell;
         this.controller = controller;
         this.method = method;

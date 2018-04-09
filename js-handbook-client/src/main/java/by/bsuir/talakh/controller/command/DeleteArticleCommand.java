@@ -3,12 +3,12 @@ package by.bsuir.talakh.controller.command;
 import by.bsuir.talakh.controller.ApplicationController;
 import by.bsuir.talakh.controller.Protocol;
 import by.bsuir.talakh.controller.ProtocolException;
+import by.bsuir.talakh.domain.JsObjectAdapter;
+import by.bsuir.talakh.domain.MethodAdapter;
+import by.bsuir.talakh.domain.OperatorAdapter;
 import by.bsuir.talakh.gui.DeleteArticleDialog;
 import by.bsuir.talakh.gui.MainShell;
 import by.bsuir.talakh.gui.TextConstant;
-import by.bsuir.talakh.jsobject.JsObject;
-import by.bsuir.talakh.method.Method;
-import by.bsuir.talakh.operator.Operator;
 import org.apache.thrift.TException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
@@ -30,12 +30,12 @@ public class DeleteArticleCommand implements ICommand {
         Object entity = dialog.getEntityToDelete();
         dialog.removeSelectedItem();
         try {
-            if (entity instanceof JsObject) {
-                protocol.deleteJsObject((JsObject) entity);
-            } else if (entity instanceof Method) {
-                protocol.deleteMethod((Method) entity);
-            } else if (entity instanceof Operator) {
-                protocol.deleteOperator((Operator) entity);
+            if (entity instanceof JsObjectAdapter) {
+                protocol.deleteJsObject((JsObjectAdapter) entity);
+            } else if (entity instanceof MethodAdapter) {
+                protocol.deleteMethod((MethodAdapter) entity);
+            } else if (entity instanceof OperatorAdapter) {
+                protocol.deleteOperator((OperatorAdapter) entity);
             }
             dialog.hideDialog();
             MessageBox infoMessage = new MessageBox(mainShell.getShell(),

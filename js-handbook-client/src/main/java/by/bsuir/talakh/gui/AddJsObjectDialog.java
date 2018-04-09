@@ -3,7 +3,7 @@ package by.bsuir.talakh.gui;
 import by.bsuir.talakh.controller.ApplicationController;
 import by.bsuir.talakh.controller.command.AddJsObjectCommand;
 import by.bsuir.talakh.controller.command.UpdateViewCommand;
-import by.bsuir.talakh.jsobject.JsObject;
+import by.bsuir.talakh.domain.JsObjectAdapter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -21,7 +21,7 @@ public class AddJsObjectDialog extends AddArticleDialog {
         addButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent selectionEvent) {
-                JsObject jsObject = new JsObject();
+                JsObjectAdapter jsObject = new JsObjectAdapter();
                 String objectName = textMap.get(TextConstant.NAME_LABEL).getText();
                 jsObject.setName(objectName);
                 String objectDescription = textMap.get(TextConstant.DESCRIPTION_LABEL).getText();

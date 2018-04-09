@@ -3,11 +3,11 @@ package by.bsuir.talakh.controller.command;
 import by.bsuir.talakh.controller.ApplicationController;
 import by.bsuir.talakh.controller.Protocol;
 import by.bsuir.talakh.controller.ProtocolException;
+import by.bsuir.talakh.domain.JsObjectAdapter;
+import by.bsuir.talakh.domain.MethodAdapter;
+import by.bsuir.talakh.domain.OperatorAdapter;
 import by.bsuir.talakh.gui.ArticleView;
 import by.bsuir.talakh.gui.MainShell;
-import by.bsuir.talakh.jsobject.JsObject;
-import by.bsuir.talakh.method.Method;
-import by.bsuir.talakh.operator.Operator;
 import org.apache.thrift.TException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
@@ -27,16 +27,16 @@ public class EditArticleCommand implements ICommand {
         ArticleView articleView = mainShell.getArticleView();
         Object article = articleView.getArticle();
         try {
-            if (article instanceof JsObject) {
-                JsObject jsObject = (JsObject) article;
+            if (article instanceof JsObjectAdapter) {
+                JsObjectAdapter jsObject = (JsObjectAdapter) article;
                 jsObject.setDescription(articleView.getArticleText());
                 protocol.updateJsObject(jsObject);
-            } else if (article instanceof Method) {
-                Method method = (Method) article;
+            } else if (article instanceof MethodAdapter) {
+                MethodAdapter method = (MethodAdapter) article;
                 method.setDescription(articleView.getArticleText());
                 protocol.updateMethod(method);
-            } else if (article instanceof Operator) {
-                Operator operator = (Operator) article;
+            } else if (article instanceof OperatorAdapter) {
+                OperatorAdapter operator = (OperatorAdapter) article;
                 operator.setDescription(articleView.getArticleText());
                 protocol.updateOperator(operator);
             }

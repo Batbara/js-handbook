@@ -2,10 +2,8 @@ package by.bsuir.talakh.gui;
 
 
 import by.bsuir.talakh.controller.ApplicationController;
-import by.bsuir.talakh.controller.Protocol;
-import by.bsuir.talakh.controller.ProtocolHandler;
 import by.bsuir.talakh.controller.command.UpdateViewCommand;
-import by.bsuir.talakh.gui.listener.EditArticleListener;
+import by.bsuir.talakh.gui.listener.SwitchProtocolListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -39,13 +37,16 @@ public class ControlButtonPanel extends Observable {
     private void initButtons() {
         Group radioButtonsGroup = new Group(holder, SWT.NONE);
         radioButtonsGroup.setLayout(new RowLayout(SWT.VERTICAL));
-
+        //radioButtonsGroup.addListener(SWT.SELECTED, new SwitchProtocolListener(controller, mainShell));
         Button rpcButton = new Button(radioButtonsGroup, SWT.RADIO);
         rpcButton.setText(TextConstant.RPC);
-        rpcButton.setSelection(true);
+        //rpcButton.setSelection(true);
+        rpcButton.addSelectionListener(new SwitchProtocolListener(controller, mainShell));
 
         Button soapButton = new Button(radioButtonsGroup, SWT.RADIO);
         soapButton.setText(TextConstant.SOAP);
+        soapButton.setSelection(true);
+        soapButton.addSelectionListener(new SwitchProtocolListener(controller, mainShell));
 
         radioButtonsGroup.setText(TextConstant.PROTOCOL);
 

@@ -27,7 +27,7 @@ public class MainShell extends Observable {
         addObserver(controller);
         display = new Display();
         shell = new Shell(display, SWT.CLOSE | SWT.TITLE | SWT.MIN);
-
+        shell.setText(TextConstant.APP_TITLE);
         GridLayout gridLayout = new GridLayout();
         gridLayout.numColumns = 3;
         shell.setLayout(gridLayout);

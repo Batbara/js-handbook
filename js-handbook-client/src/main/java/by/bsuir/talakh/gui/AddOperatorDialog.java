@@ -3,6 +3,7 @@ package by.bsuir.talakh.gui;
 import by.bsuir.talakh.controller.ApplicationController;
 import by.bsuir.talakh.controller.command.AddOperatorCommand;
 import by.bsuir.talakh.controller.command.UpdateViewCommand;
+import by.bsuir.talakh.domain.OperatorAdapter;
 import by.bsuir.talakh.operator.Operator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -27,7 +28,7 @@ public class AddOperatorDialog extends AddArticleDialog {
         addButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent selectionEvent) {
-                Operator operator = new Operator();
+                OperatorAdapter operator = new OperatorAdapter();
 
                 String operatorName = textMap.get(TextConstant.NAME_LABEL).getText();
                 operator.setName(operatorName);
