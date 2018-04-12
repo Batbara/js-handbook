@@ -20,15 +20,15 @@ public final class DomainAdapter {
         return jsObjectAdapter;
     }
 
-    public static by.js_handbook.JsHandbookServiceStub.JsObject getAxisJsObject(JsObjectAdapter jsObjectAdapter) {
-        by.js_handbook.JsHandbookServiceStub.JsObject jsObject = new by.js_handbook.JsHandbookServiceStub.JsObject();
+    public static by.bsuir.talakh.axis.service.JsHandbookServiceStub.JsObject getAxisJsObject(JsObjectAdapter jsObjectAdapter) {
+        by.bsuir.talakh.axis.service.JsHandbookServiceStub.JsObject jsObject = new by.bsuir.talakh.axis.service.JsHandbookServiceStub.JsObject();
         jsObject.setDescription(jsObjectAdapter.getDescription());
         jsObject.setName(jsObjectAdapter.getName());
         jsObject.setId(jsObjectAdapter.getId());
         return jsObject;
     }
 
-    public static JsObjectAdapter getJsObjectAdapterFromAxis(by.js_handbook.JsHandbookServiceStub.JsObject jsObject) {
+    public static JsObjectAdapter getJsObjectAdapterFromAxis(by.bsuir.talakh.axis.service.JsHandbookServiceStub.JsObject jsObject) {
         JsObjectAdapter jsObjectAdapter = new JsObjectAdapter();
         jsObjectAdapter.setDescription(jsObject.getDescription());
         jsObjectAdapter.setId(jsObject.getId());
@@ -59,18 +59,18 @@ public final class DomainAdapter {
         return methodAdapter;
     }
 
-    public static by.js_handbook.JsHandbookServiceStub.Method getAxisMethod(MethodAdapter methodAdapter) {
-        by.js_handbook.JsHandbookServiceStub.Method method =
-                new by.js_handbook.JsHandbookServiceStub.Method();
+    public static by.bsuir.talakh.axis.service.JsHandbookServiceStub.Method getAxisMethod(MethodAdapter methodAdapter) {
+        by.bsuir.talakh.axis.service.JsHandbookServiceStub.Method method =
+                new by.bsuir.talakh.axis.service.JsHandbookServiceStub.Method();
         method.setDescription(methodAdapter.getDescription());
         method.setName(methodAdapter.getName());
         method.setId(methodAdapter.getId());
-        by.js_handbook.JsHandbookServiceStub.JsObject jsObject = getAxisJsObject(methodAdapter.getMethodObject());
+        by.bsuir.talakh.axis.service.JsHandbookServiceStub.JsObject jsObject = getAxisJsObject(methodAdapter.getMethodObject());
         method.setMethodObject(jsObject);
         return method;
     }
 
-    public static MethodAdapter getMethodAdapterFromAxis(by.js_handbook.JsHandbookServiceStub.Method method) {
+    public static MethodAdapter getMethodAdapterFromAxis(by.bsuir.talakh.axis.service.JsHandbookServiceStub.Method method) {
         MethodAdapter methodAdapter = new MethodAdapter();
         methodAdapter.setDescription(method.getDescription());
         methodAdapter.setId(method.getId());
@@ -81,8 +81,8 @@ public final class DomainAdapter {
         return methodAdapter;
     }
 
-    public static by.js_handbook.JsHandbookServiceStub.Operator getAxisOperator(OperatorAdapter operatorAdapter) {
-        by.js_handbook.JsHandbookServiceStub.Operator operator = new by.js_handbook.JsHandbookServiceStub.Operator();
+    public static by.bsuir.talakh.axis.service.JsHandbookServiceStub.Operator getAxisOperator(OperatorAdapter operatorAdapter) {
+        by.bsuir.talakh.axis.service.JsHandbookServiceStub.Operator operator = new by.bsuir.talakh.axis.service.JsHandbookServiceStub.Operator();
         operator.setDescription(operatorAdapter.getDescription());
         operator.setId(operatorAdapter.getId());
         operator.setName(operatorAdapter.getName());
@@ -90,7 +90,7 @@ public final class DomainAdapter {
         return operator;
     }
 
-    public static OperatorAdapter getOperatorAdapterFromAxis(by.js_handbook.JsHandbookServiceStub.Operator operator) {
+    public static OperatorAdapter getOperatorAdapterFromAxis(by.bsuir.talakh.axis.service.JsHandbookServiceStub.Operator operator) {
         OperatorAdapter operatorAdapter = new OperatorAdapter();
         operatorAdapter.setDescription(operator.getDescription());
         operatorAdapter.setId(operator.getId());

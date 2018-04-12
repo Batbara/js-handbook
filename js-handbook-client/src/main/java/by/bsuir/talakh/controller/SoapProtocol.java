@@ -1,10 +1,10 @@
 package by.bsuir.talakh.controller;
 
+import by.bsuir.talakh.axis.service.JsHandbookServiceStub;
 import by.bsuir.talakh.domain.DomainAdapter;
 import by.bsuir.talakh.domain.JsObjectAdapter;
 import by.bsuir.talakh.domain.MethodAdapter;
 import by.bsuir.talakh.domain.OperatorAdapter;
-import by.js_handbook.JsHandbookServiceStub;
 import org.apache.axis2.AxisFault;
 
 import java.rmi.RemoteException;
@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SoapProtocol implements Protocol {
+
     private final static String END_POINT = "http://localhost:8080/axis2/services/JsHandbookService?wsdl";
+
     private JsHandbookServiceStub serviceStub;
 
     public SoapProtocol() throws AxisFault {
