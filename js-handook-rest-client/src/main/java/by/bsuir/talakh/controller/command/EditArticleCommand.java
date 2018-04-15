@@ -3,12 +3,11 @@ package by.bsuir.talakh.controller.command;
 import by.bsuir.talakh.controller.ApplicationController;
 import by.bsuir.talakh.controller.Protocol;
 import by.bsuir.talakh.controller.ProtocolException;
-import by.bsuir.talakh.domain.JsObjectAdapter;
-import by.bsuir.talakh.domain.MethodAdapter;
-import by.bsuir.talakh.domain.OperatorAdapter;
+import by.bsuir.talakh.domain.JsObject;
+import by.bsuir.talakh.domain.Method;
+import by.bsuir.talakh.domain.Operator;
 import by.bsuir.talakh.gui.ArticleView;
 import by.bsuir.talakh.gui.MainShell;
-import org.apache.thrift.TException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 
@@ -27,16 +26,16 @@ public class EditArticleCommand implements ICommand {
         ArticleView articleView = mainShell.getArticleView();
         Object article = articleView.getArticle();
         try {
-            if (article instanceof JsObjectAdapter) {
-                JsObjectAdapter jsObject = (JsObjectAdapter) article;
+            if (article instanceof JsObject) {
+                JsObject jsObject = (JsObject) article;
                 jsObject.setDescription(articleView.getArticleText());
                 protocol.updateJsObject(jsObject);
-            } else if (article instanceof MethodAdapter) {
-                MethodAdapter method = (MethodAdapter) article;
+            } else if (article instanceof Method) {
+                Method method = (Method) article;
                 method.setDescription(articleView.getArticleText());
                 protocol.updateMethod(method);
-            } else if (article instanceof OperatorAdapter) {
-                OperatorAdapter operator = (OperatorAdapter) article;
+            } else if (article instanceof Operator) {
+                Operator operator = (Operator) article;
                 operator.setDescription(articleView.getArticleText());
                 protocol.updateOperator(operator);
             }
@@ -47,7 +46,7 @@ public class EditArticleCommand implements ICommand {
             infoMessage.setMessage("Article was successfully updated!");
             infoMessage.open();
 
-        } catch (TException e) {
+        } catch (ProtocolException e) {
             articleView.setEditMode(false);
             MessageBox errorMessage = new MessageBox(mainShell.getShell(),
                     SWT.ICON_ERROR | SWT.OK);
