@@ -5,6 +5,17 @@ JS handbook project contains:
 
 * Thrift-based server application
 
+* Source code for thrift generated classes
+
 * Axis2-based server sources
 
-* Source code for thrift generated classes
+* RESTful server and client
+
+Used technologies:
+* Apache Tomcat 8
+
+* Maven 
+
+* Ant
+
+* Project Jersey v2.26
