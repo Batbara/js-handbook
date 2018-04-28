@@ -10,6 +10,10 @@ public class Operator implements Serializable {
     private String operatorSymbol;
     public Operator(){}
 
+    public Operator(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -9,6 +9,12 @@ body {
     flex-direction: column;
 }
 
+pre {
+    white-space: pre-wrap;
+    border: none;
+    background-color: transparent;
+}
+
 .holder {
     display: flex;
     justify-content: center;
@@ -52,13 +58,77 @@ body {
     text-decoration: none;
 }
 
-.side-nav-button {
-    font-family: 'Tinos', serif;
-    font-size: 17px;
+li > a, li > a:visited {
+    color: wheat;
+    text-decoration: none;
+}
+
+li > a.active {
     color: #B8C99D;
-    position: relative;
-    display: block;
-    padding: 10px 15px;
+    text-decoration: underline;
+}
+
+li > a:hover {
+    color: #B8C99D;
+    text-decoration: none;
+}
+
+.side-nav {
+    font-size: 17px;
+    color: wheat;
+
+}
+
+.control-buttons {
+    margin-left: 50px;
+}
+
+.input-wrapper {
+    margin-left: 150px;
+}
+
+.scroll {
+    overflow-y: scroll;
+    overflow-x: visible;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 15px;
+    color: #665959;
+}
+
+.scroll::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(left, #fff, #e4e4e4);
+    border: 1px solid #946666;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+}
+
+.scroll::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22ADD4, #1E98BA);
+}
+
+.js-objects-list {
+    /* overflow-y: auto; */
+    height: 200px;
+    margin-top: 20px;
+    margin-bottom: 80px;
+    color: wheat;
+}
+
+.operators-list {
+
+    height: 220px;
+    color: wheat;
 }
 
 .main > aside {

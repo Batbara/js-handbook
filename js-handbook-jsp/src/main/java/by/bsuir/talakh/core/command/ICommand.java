@@ -1,4 +1,4 @@
-package by.bsuir.talakh.core;
+package by.bsuir.talakh.core.command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

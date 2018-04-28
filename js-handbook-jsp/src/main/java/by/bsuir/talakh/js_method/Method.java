@@ -15,6 +15,12 @@ public class Method implements Serializable {
         methodObject = new JsObject();
     }
 
+    public Method(int id) {
+        this();
+        this.id = id;
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

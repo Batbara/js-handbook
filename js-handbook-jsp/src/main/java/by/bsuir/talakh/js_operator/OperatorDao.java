@@ -35,27 +35,31 @@ public class OperatorDao {
 
     private final static String UPDATE_OPERATOR_QUERY = "UPDATE  operator " +
             "                    SET operator_description = ? " +
-            "                  WHERE operator_name = ?";
+            "                  WHERE operator_id = ?";
 
 
     private final static String DELETE_OPERATOR_QUERY = "DELETE FROM operator WHERE operator_id= ?";
 
-    public void addOperator(Operator operator) {
+    public int addOperator(Operator operator) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
             connection = ConnectionConfig.getConnection();
             String operatorName = operator.getName();
             String operatorSymbol = operator.getOperatorSymbol();
             String operatorDescription = operator.getDescription();
 
-            preparedStatement = connection.prepareStatement(ADD_OPERATOR_QUERY);
+            preparedStatement = connection.prepareStatement(ADD_OPERATOR_QUERY, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, operatorName);
             preparedStatement.setString(2, operatorSymbol);
             preparedStatement.setString(3, operatorDescription);
 
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            resultSet.next();
+            return resultSet.getInt(1);
 
         } catch (SQLException e) {
             LOGGER.error("Failed to add operator to data base", e);
@@ -101,12 +105,12 @@ public class OperatorDao {
         PreparedStatement preparedStatement = null;
         try {
             connection = ConnectionConfig.getConnection();
-            String operatorName = operator.getName();
+            int operatorId = operator.getId();
             String operatorDescription = operator.getDescription();
 
             preparedStatement = connection.prepareStatement(UPDATE_OPERATOR_QUERY);
 
-            preparedStatement.setString(2, operatorName);
+            preparedStatement.setInt(2, operatorId);
             preparedStatement.setString(1, operatorDescription);
 
             preparedStatement.executeUpdate();
@@ -143,11 +147,12 @@ public class OperatorDao {
     public Operator findById(int id) {
         Connection connection = null;
         ResultSet resultSet = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         try {
             connection = ConnectionConfig.getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(TAKE_OPERATOR_BY_ID_QUERY);
+            statement = connection.prepareStatement(TAKE_OPERATOR_BY_ID_QUERY);
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             Operator operator = new Operator();
 

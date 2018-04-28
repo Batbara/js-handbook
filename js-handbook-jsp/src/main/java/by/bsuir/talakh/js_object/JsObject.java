@@ -16,6 +16,10 @@ public class JsObject implements Serializable {
         methodList = new ArrayList<>();
     }
 
+    public JsObject(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

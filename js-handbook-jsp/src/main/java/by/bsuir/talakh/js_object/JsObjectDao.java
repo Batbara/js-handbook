@@ -33,24 +33,28 @@ public class JsObjectDao {
 
     private final static String UPDATE_OBJECT_QUERY = "UPDATE  object " +
             "                    SET object_descr = ? " +
-            "                  WHERE object_name = ?";
+            "                  WHERE object_id = ?";
 
     private final static String DELETE_OBJECT_QUERY = "DELETE FROM object WHERE object_id= ?";
 
-    public void addObject(JsObject jsObject)  {
+    public int addObject(JsObject jsObject) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
             connection = ConnectionConfig.getConnection();
             String objectName = jsObject.getName();
             String methodDescription = jsObject.getDescription();
 
-            preparedStatement = connection.prepareStatement(ADD_OBJECT_QUERY);
+            preparedStatement = connection.prepareStatement(ADD_OBJECT_QUERY, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, objectName);
             preparedStatement.setString(2, methodDescription);
 
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            resultSet.next();
+            return resultSet.getInt(1);
 
         } catch (SQLException e) {
             LOGGER.error("Failed to add js-object to data base", e);
@@ -97,12 +101,11 @@ public class JsObjectDao {
         try {
             connection = ConnectionConfig.getConnection();
             int objectId = jsObject.getId();
-            String objectName = jsObject.getName();
             String objectDescription = jsObject.getDescription();
 
             preparedStatement = connection.prepareStatement(UPDATE_OBJECT_QUERY);
 
-            preparedStatement.setString(2, objectName);
+            preparedStatement.setInt(2, objectId);
             preparedStatement.setString(1, objectDescription);
 
             int rowsAffected = preparedStatement.executeUpdate();
@@ -140,11 +143,12 @@ public class JsObjectDao {
 
         Connection connection = null;
         ResultSet resultSet = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         try {
             connection = ConnectionConfig.getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(TAKE_OBJECT_BY_ID_QUERY);
+            statement = connection.prepareStatement(TAKE_OBJECT_BY_ID_QUERY);
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             JsObject jsObject = new JsObject();
 

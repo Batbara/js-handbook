@@ -33,25 +33,29 @@ public class MethodDao {
             "                               FROM method WHERE method_name = ?";
     private final static String UPDATE_METHOD_QUERY = "UPDATE  method " +
             "                    SET method_description = ? " +
-            "                  WHERE method_name = ?";
+            "                  WHERE method_id = ?";
     private final static String DELETE_METHOD_QUERY = "DELETE FROM method WHERE method_id= ?";
 
-    public void addMethod(Method method) {
+    public int addMethod(Method method) {
         LOGGER.info("Trying to add  " + method);
         Connection connection = null;
         PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
             connection = ConnectionConfig.getConnection();
             String methodName = method.getName();
             String methodDescription = method.getDescription();
             int objectId = method.getMethodObject().getId();
-            preparedStatement = connection.prepareStatement(ADD_METHOD_QUERY);
+            preparedStatement = connection.prepareStatement(ADD_METHOD_QUERY, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, methodName);
             preparedStatement.setString(2, methodDescription);
             preparedStatement.setInt(3, objectId);
 
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            resultSet.next();
+            return resultSet.getInt(1);
         } catch (SQLException e) {
             LOGGER.error("Failed to add method to data base", e);
             throw new DaoException("Failed to add method to data base", e);
@@ -99,12 +103,12 @@ public class MethodDao {
         PreparedStatement preparedStatement = null;
         try {
             connection = ConnectionConfig.getConnection();
-            String methodName = method.getName();
+            int methodId = method.getId();
             String methodDescription = method.getDescription();
 
             preparedStatement = connection.prepareStatement(UPDATE_METHOD_QUERY);
 
-            preparedStatement.setString(2, methodName);
+            preparedStatement.setInt(2, methodId);
             preparedStatement.setString(1, methodDescription);
 
             preparedStatement.executeUpdate();
@@ -142,11 +146,12 @@ public class MethodDao {
     public Method findById(int id) {
         Connection connection = null;
         ResultSet resultSet = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         try {
             connection = ConnectionConfig.getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(TAKE_METHOD_BY_ID_QUERY);
+            statement = connection.prepareStatement(TAKE_METHOD_BY_ID_QUERY);
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
 
             Method method = new Method();
 

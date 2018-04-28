@@ -13,6 +13,14 @@
     </servlet-mapping>
 
     <filter>
+        <filter-name>DataInitializationFilter</filter-name>
+        <filter-class>by.bsuir.talakh.core.DataInitializationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DataInitializationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
         <filter-name>NoCacheFilter</filter-name>
         <filter-class>by.bsuir.talakh.core.NoCacheFilter</filter-class>
     </filter>
