@@ -11,6 +11,9 @@
     <title>JS Handbook</title>
 </head>
 <body>
+<header>
+    <c:import url="/WEB-INF/jsp/topBar.jsp"/>
+</header>
 <div class="main">
     <nav class="side-nav">
         <c:import url="/WEB-INF/jsp/navMenu.jsp"/>

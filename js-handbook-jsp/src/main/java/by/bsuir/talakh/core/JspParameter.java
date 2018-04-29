@@ -11,6 +11,8 @@ public final class JspParameter {
     public static final String ARTICLE_NAME = "article_name";
     public static final String ARTICLE_DESCRIPTION = "article_description";
     public static final String OPERATOR_SYMBOL = "operator_symbol";
+    public static final String CODE = "code";
+    public static final String USER = "user";
 
     private JspParameter() {
     }

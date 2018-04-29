@@ -1,5 +1,11 @@
 package by.bsuir.talakh.core.command;
 
+import by.bsuir.talakh.core.command.auth.GoogleAuthCmd;
+import by.bsuir.talakh.core.command.auth.GoogleTokenCmd;
+import by.bsuir.talakh.core.command.auth.LogOutCmd;
+import by.bsuir.talakh.core.command.auth.VkAuthCmd;
+import by.bsuir.talakh.core.command.auth.VkTokenCmd;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +31,12 @@ public class CommandProvider {
         commands.put("delete_js_object", new DeleteJsObjectCmd());
         commands.put("delete_method", new DeleteMethodCmd());
         commands.put("delete_operator", new DeleteOperatorCmd());
+
+        commands.put("auth_google", new GoogleAuthCmd());
+        commands.put("token_google", new GoogleTokenCmd());
+        commands.put("auth_vk", new VkAuthCmd());
+        commands.put("token_vk", new VkTokenCmd());
+        commands.put("logout", new LogOutCmd());
     }
 
     public static CommandProvider getInstance() {

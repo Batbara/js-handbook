@@ -12,7 +12,11 @@
     <title>JS Handbook | ${operator}</title>
 </head>
 <body>
+<header>
+    <c:import url="/WEB-INF/jsp/topBar.jsp"/>
+</header>
 <div class="main">
+
     <nav class="side-nav">
         <c:import url="/WEB-INF/jsp/navMenu.jsp"/>
     </nav>
@@ -26,63 +30,76 @@
                     <pre>${operator.description}</pre>
                 </div>
             </div>
-            <div class="control-buttons">
-                <button type="button" class="btn btn-primary" id="addOperatorBtn">Add operator</button>
-                <button type="button" class="btn btn-edit" id="editArticleBtn">Edit</button>
-                <form method="post" id="deleteForm" action="${pageContext.request.contextPath}/js" class="form-inline">
-                    <input type="hidden" name="command" value="delete_operator">
-                    <input type="hidden" name="id" value="${operator.id}">
-                    <input type="submit" class="btn btn-danger" id="deleteArticle" value="Delete article">
-                </form>
-            </div>
-            <div class="input-wrapper">
-                <div id="add-article">
-                    <div id="addOperator">
-                        <form method="post" action="${pageContext.request.contextPath}/js" class="form-horizontal">
-                            <div class="control-group">
-                                <input type="hidden" name="command" value="add_operator">
-                                <label for="add_symbol" class="control-label">Symbol</label>
-                                <div class="controls">
-                                    <input type="text" id="add_symbol" name="operator_symbol">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="article_name" class="control-label">Name</label>
-                                <div class="controls">
-                                    <input type="text" id="article_name" name="article_name">
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="js_object_article_description" class="control-label">Description</label>
-                                <div class="controls">
-                            <textarea id="js_object_article_description" name="article_description" rows="6"
-                                      cols="67"></textarea>
-                                </div>
-                                <div class="controls">
-                                    <input type="submit" value="OK">
-                                </div>
-                            </div>
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
 
+                    <div class="control-buttons">
+                        <button type="button" class="btn btn-primary" id="addOperatorBtn">Add operator</button>
+                        <button type="button" class="btn btn-edit" id="editArticleBtn">Edit</button>
+                        <form method="post" id="deleteForm" action="${pageContext.request.contextPath}/js"
+                              class="form-inline">
+                            <input type="hidden" name="command" value="delete_operator">
+                            <input type="hidden" name="id" value="${operator.id}">
+                            <input type="submit" class="btn btn-danger" id="deleteArticle" value="Delete article">
                         </form>
                     </div>
-                </div>
-                <div id="edit-article">
-                    <form method="post" action="${pageContext.request.contextPath}/js">
-                        <div class="control-group">
-                            <input type="hidden" name="command" value="update_operator">
-                            <input type="hidden" name="id" value="${operator.id}">
-                            <label for="edit_article_description" class="control-label">Description</label>
-                            <div class="controls">
-                    <textarea id="edit_article_description" name="article_description" rows="6"
-                              cols="67">${operator.description}</textarea>
-                            </div>
-                            <div class="controls">
-                                <input type="submit" value="Save">
+                    <div class="input-wrapper">
+                        <div id="add-article">
+                            <div id="addOperator">
+                                <form method="post" action="${pageContext.request.contextPath}/js"
+                                      class="form-horizontal">
+                                    <div class="control-group">
+                                        <input type="hidden" name="command" value="add_operator">
+                                        <label for="add_symbol" class="control-label">Symbol</label>
+                                        <div class="controls">
+                                            <input type="text" id="add_symbol" name="operator_symbol">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="article_name" class="control-label">Name</label>
+                                        <div class="controls">
+                                            <input type="text" id="article_name" name="article_name">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="js_object_article_description"
+                                               class="control-label">Description</label>
+                                        <div class="controls">
+                            <textarea id="js_object_article_description" name="article_description" rows="6"
+                                      cols="67"></textarea>
+                                        </div>
+                                        <div class="controls">
+                                            <input type="submit" value="OK">
+                                        </div>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
+                        <div id="edit-article">
+                            <form method="post" action="${pageContext.request.contextPath}/js">
+                                <div class="control-group">
+                                    <input type="hidden" name="command" value="update_operator">
+                                    <input type="hidden" name="id" value="${operator.id}">
+                                    <label for="edit_article_description" class="control-label">Description</label>
+                                    <div class="controls">
+                    <textarea id="edit_article_description" name="article_description" rows="6"
+                              cols="67">${operator.description}</textarea>
+                                    </div>
+                                    <div class="controls">
+                                        <input type="submit" value="Save">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="holder">
+                        To change content you should authorize first!
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </article>
     <aside>

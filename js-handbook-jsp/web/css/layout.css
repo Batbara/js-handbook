@@ -138,45 +138,42 @@ li > a:hover {
     background: #F0D399;
 }
 
-@media all and (max-width: 780px) {
-
-    .main {
-        -webkit-flex-flow: column;
-        flex-flow: column;
-
-    }
-
-    .main > article, .main > nav, .main > aside {
-        -webkit-order: 0;
-        order: 0;
-    }
-
-    .main > aside {
-        order: 2;
-    }
-
-    .nav {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        margin-top: 10px;
-    }
-
-    .main > nav {
-        display: flex;
-        order: 2;
-    }
-
-    .affix {
-        position: static;
-    }
-
-    .main > nav, .main > aside, header, footer {
-        min-height: 50px;
-        margin: 0;
-
-    }
-
+.nav-item {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #B8C99D;
+    font-size: 20px;
+    margin-right: 10px;
 }
 
+.top-navbar {
+    width: 100%;
+    height: 55px;
+    background-color: #595151;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.main-nav > li:first-child {
+    margin-top: 0;
+}
+
+.main-nav, .profile-nav {
+    display: -webkit-flex;
+    display: flex;
+    margin-right: 15%;
+}
+
+.main-nav {
+    list-style: none;
+    margin: 0;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+}
