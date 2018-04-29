@@ -41,14 +41,9 @@ public class VkTokenCmd implements ICommand {
             response.sendRedirect(JspPagePath.INDEX);
             return;
         }
-        String accessToken = jsonObject.getString("access_token");
         int id = jsonObject.getInt("user_id");
-     /*   User user = new User();
-        user.setAccessToken(accessToken);
-        user.setName("lol");
-        user.setSurname("kek");*/
+
         User user = takeUserInfo(httpClient, id);
-        //user.setAccessToken(accessToken);
 
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
@@ -77,7 +72,7 @@ public class VkTokenCmd implements ICommand {
             for (int entry = 0; entry < response.length(); entry++) {
                 JSONObject object = response.getJSONObject(entry);
                 if (object.has("first_name")) {
-                    user.setName(decode(object.getString("first_name")));
+                    user.setFirstName(decode(object.getString("first_name")));
                 }
                 if (object.has("last_name")) {
                     user.setSurname(decode(object.getString("last_name")));

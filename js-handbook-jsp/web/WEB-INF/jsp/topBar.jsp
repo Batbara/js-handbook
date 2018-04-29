@@ -7,7 +7,7 @@
         <c:choose>
             <c:when test="${not empty sessionScope.user}">
                 <li>
-                    <span class="nav-item"> You are logged as ${sessionScope.user.name} ${sessionScope.user.surname}</span>
+                    <span class="nav-item"> You are logged as ${sessionScope.user.fullName}</span>
                 </li>
                 <li>
                     <a href="/js?command=logout">Log out</a>

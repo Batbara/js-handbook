@@ -4,21 +4,23 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class User implements Serializable {
-    private String name;
+    private String firstName;
     private String surname;
     private String nikName;
     private String userId;
     private String accessToken;
+    private String fullName;
 
     public User() {
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+        fullName = firstName;
     }
 
     public String getSurname() {
@@ -27,6 +29,7 @@ public class User implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
+        fullName += " " + surname;
     }
 
     public String getNikName() {
@@ -53,10 +56,18 @@ public class User implements Serializable {
         this.accessToken = accessToken;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", nikName='" + nikName + '\'' +
                 ", userId='" + userId + '\'' +
@@ -69,7 +80,7 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(name, user.name) &&
+        return Objects.equals(firstName, user.firstName) &&
                 Objects.equals(surname, user.surname) &&
                 Objects.equals(nikName, user.nikName) &&
                 Objects.equals(userId, user.userId) &&
@@ -79,6 +90,6 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, surname, nikName, userId, accessToken);
+        return Objects.hash(firstName, surname, nikName, userId, accessToken);
     }
 }
