@@ -21,12 +21,12 @@
         <c:import url="/WEB-INF/jsp/navMenu.jsp"/>
     </nav>
     <article>
-        <div>
+        <div itemscope itemtype="http://schema.org/ComputerLanguage">
             <div class="welcome-header">
-                <h2>${jsObject.name}</h2>
+                <h2 itemprop="name">${jsObject.name}</h2>
             </div>
             <div class="holder">
-                <div class="site-info">
+                <div class="site-info" itemprop="description">
                     <pre>${jsObject.description}</pre>
                 </div>
             </div>

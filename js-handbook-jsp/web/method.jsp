@@ -5,6 +5,10 @@
 <html>
 <head>
     <jsp:useBean id="method" class="by.bsuir.talakh.js_method.Method" scope="request"/>
+
+    <jsp:useBean id="method2" class="by.bsuir.talakh.js_method.Method" scope="application"/>
+    <jsp:useBean id="method3" class="by.bsuir.talakh.js_method.Method" scope="page"/>
+    <jsp:useBean id="user" class="by.bsuir.talakh.core.User" scope="session"/>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
@@ -21,12 +25,12 @@
         <c:import url="/WEB-INF/jsp/navMenu.jsp"/>
     </nav>
     <article>
-        <div>
+        <div itemscope itemtype="http://schema.org/ComputerLanguage">
             <div class="welcome-header">
-                <h2>${method.name}</h2>
+                <h2 itemprop="name">${method.name}</h2>
             </div>
             <div class="holder">
-                <div class="site-info">
+                <div class="site-info" itemprop="description">
                     <pre>${method.description}</pre>
                 </div>
             </div>

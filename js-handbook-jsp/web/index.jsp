@@ -7,12 +7,17 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
-    <c:import url="/WEB-INF/jsp/styling.jsp"/>
+
+    <%@ include file="WEB-INF/jsp/styling.jsp" %>
     <title>JS Handbook</title>
 </head>
 <body>
 <header>
-    <c:import url="/WEB-INF/jsp/topBar.jsp"/>
+    <jsp:include page="/WEB-INF/jsp/topBar.jsp"/>
+    <c:set var="test1" value="PAGE_SCOPE" scope="page"/>
+    <c:set var="test2" value="SESSION_SCOPE" scope="session"/>
+    <c:set var="test3" value="REQUEST_SCOPE" scope="request"/>
+    <c:set var="test4" value="APPLICATION_SCOPE" scope="application"/>
 </header>
 <div class="main">
     <nav class="side-nav">

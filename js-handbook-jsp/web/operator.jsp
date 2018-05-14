@@ -21,12 +21,12 @@
         <c:import url="/WEB-INF/jsp/navMenu.jsp"/>
     </nav>
     <article>
-        <div>
+        <div itemscope itemtype="http://schema.org/ComputerLanguage">
             <div class="welcome-header">
-                <h2>${operator.operatorSymbol} - ${operator.name}</h2>
+                <h2 itemprop="name">${operator.operatorSymbol} - ${operator.name}</h2>
             </div>
             <div class="holder">
-                <div class="site-info">
+                <div class="site-info" itemprop="description">
                     <pre>${operator.description}</pre>
                 </div>
             </div>
