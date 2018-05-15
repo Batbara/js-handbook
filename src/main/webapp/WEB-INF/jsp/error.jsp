@@ -21,14 +21,9 @@
     <article>
         <div>
             <div class="welcome-header">
-                <h1>Welcome to JS Handbook project!</h1>
+                <h1>${errorMessage}</h1>
             </div>
-            <div class="holder">
-                <div class="site-info" id="content">
-                    Here you can gain crucial information about Java Script. And  make yourself useful: edit, add, delete articles!
-                </div>
 
-            </div>
         </div>
     </article>
     <aside>
