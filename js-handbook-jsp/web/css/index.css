@@ -1,0 +1,29 @@
+.welcome-header {
+
+    padding-bottom: 9px;
+    margin: 40px 10px 20px;
+    border-bottom: 1px solid #f0d399;
+}
+
+.welcome-header h2 {
+    color: wheat;
+}
+
+.site-info {
+    border: 1px solid rgb(200, 200, 200);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
+    background: rgba(200, 200, 200, 0.1);
+    border-radius: 4px;
+    max-width: 900px;
+    min-width: 600px;
+    font-size: 16px;
+    padding: 15px;
+    margin: 20px;
+    text-align: left;
+}
+
+.site-info pre {
+
+    border: none;
+    background-color: transparent;
+}

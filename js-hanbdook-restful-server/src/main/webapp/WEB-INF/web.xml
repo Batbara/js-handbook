@@ -1,0 +1,19 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+    <servlet>
+        <servlet-name>RESTful-servlet</servlet-name>
+        <servlet-class>
+            org.glassfish.jersey.servlet.ServletContainer
+        </servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>by.bsuir.talakh.rest.service</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RESTful-servlet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
